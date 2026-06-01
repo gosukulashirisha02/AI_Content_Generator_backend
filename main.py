@@ -1,24 +1,25 @@
 from fastapi import FastAPI
 from groq import Groq
-from dotenv import load_dotenv
+
 import os
 
-load_dotenv()
+
 
 app=FastAPI()
 
 client=Groq(
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1"
 )
 
 @app.post("/generate")
 def generte_content(
     topic:str,
-    technolofy:str,
+    technology:str,
     content_type:str,
     tone:str
 ):
-    prompt=f"""
+    prompt = f"""
     Generate a {content_type}
     Topic:{topic}
     Technology:{technology}
@@ -31,7 +32,7 @@ def generte_content(
         messages=[
             {
                 "role":"user",
-                "content":"prompt"
+                "content":prompt
             }
         ]
     )
