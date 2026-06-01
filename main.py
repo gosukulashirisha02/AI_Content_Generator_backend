@@ -10,9 +10,8 @@ app=FastAPI()
 def home(): 
     return{ "msg":"content generated successfully" }
 
-client=Groq(
-    api_key=os.getenv("GROQ_API_KEY"),
-    base_url="https://api.groq.com/openai/v1"
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 @app.post("/generate")
